@@ -2,16 +2,25 @@
 #
 # Author: taketoshi.kazusa
 #
-import unittest
-import dollar
+import sys,os
+sys.path.append(os.pardir)
 
-class MoneyTestv(unittest.TestCase):
+import pytest
+from dollar import Dollar
+
+
+class TestMoney(object):
     """Test for money class"""
-    
-    def test_Multiplication(self):
-        five = dollar.Dollar(5)
-        five.times(2)
-        self.assertEqual(10, five.amount, "ammount expetced 10")
+   
+    @pytest.fixture
+    def dollar(request):
+        return Dollar(5)
+
+    def test_Multiplication(self, dollar):
+        expected = 10
+        dollar.times(2)
+        actual = dollar.amount
+        assert actual == expected
 
 
         
