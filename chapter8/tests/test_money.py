@@ -6,8 +6,7 @@ import sys,os
 sys.path.append(os.pardir)
 
 import pytest
-from moneys.dollar import Dollar
-from moneys.franc import Franc
+from moneys.money import Money
 
 
 class TestMoney(object):
@@ -15,31 +14,22 @@ class TestMoney(object):
     
   
     @pytest.fixture
-    def dollar(request):
-        return Dollar
-    
-    @pytest.fixture
-    def franc(request):
-        return Franc
- 
-    def test_DollarMultiplication(self, dollar):
-        assert dollar(5).times(2) == dollar(10)
-        assert dollar(5).times(3) == dollar(15)
+    def money(request):
+        return Money
 
-    def test_FrancMultiplication(self, franc):
-        assert franc(5).times(2) == franc(10)
-        assert franc(5).times(3) == franc(15)
+    def test_DollarMultiplication(self, money):
+        assert money.dollar(5).times(2) == money.dollar(10)
+        assert money.dollar(5).times(3) == money.dollar(15)
 
-    def test_Equality(self, dollar, franc):
-        assert dollar(5)._amount == dollar(5)._amount
-        assert dollar(5)._amount != dollar(6)._amount
-        assert franc(5)._amount == franc(5)._amount
-        assert franc(5)._amount != franc(6)._amount
-        assert franc(5)._amount != dollar(6)._amount
+    def test_FrancMultiplication(self, money):
+        assert money.franc(5).times(2) == money.franc(10)
+        assert money.franc(5).times(3) == money.franc(15)
 
-
-
-
-
+    def test_Equality(self, money):
+        assert money.dollar(5)._amount == money.dollar(5)._amount
+        assert money.dollar(5)._amount != money.dollar(6)._amount
+        assert money.franc(5)._amount == money.franc(5)._amount
+        assert money.franc(5)._amount != money.franc(6)._amount
+        assert money.franc(5)._amount != money.dollar(6)._amount
 
         
