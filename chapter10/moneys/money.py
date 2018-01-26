@@ -1,7 +1,4 @@
-from abc import ABCMeta, abstractmethod
-
-
-class Money(metaclass=ABCMeta):
+class Money(object):
     """Money class"""
 
     def __init__(self, amount: int, currency: str):
@@ -10,11 +7,10 @@ class Money(metaclass=ABCMeta):
 
     def __eq__(self, other):
         return self._amount == other._amount and \
-            self.__class__.__name__ == other.__class__.__name__
+            self.currency() == other.currency()
     
     def __repr__(self):
         return str(self._amount) + " " + self._currency
-
 
     def times(self, multiplier: int):
         return Money(self._amount * multiplier, self.currency())
