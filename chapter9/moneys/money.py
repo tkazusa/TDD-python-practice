@@ -16,7 +16,6 @@ class Money(metaclass=ABCMeta):
     def times(self, multiplier: int):
         raise NotImplementedError()
 
-    @abstractmethod
     def currency(self):
         return self._currency
 

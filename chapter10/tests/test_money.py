@@ -32,4 +32,11 @@ class TestMoney(object):
         assert money.franc(5)._amount != money.franc(6)._amount
         assert money.franc(5)._amount != money.dollar(6)._amount
 
-        
+    def test_currency(self):
+        assert Money.franc(1).currency() == "CHF"
+        assert Money.dollar(1).currency() == "USD"
+
+    def test_differentclass_equality(self):
+        assert Money(10, "CHF") == Money.franc(10)
+
+
