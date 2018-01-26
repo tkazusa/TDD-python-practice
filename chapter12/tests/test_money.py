@@ -35,4 +35,4 @@ class TestMoney(object):
         assert Money.dollar(1).currency() == "USD"
     
     def test_SimpleAddition(self):
-        sumation_result = 
+        assert Money.dollar(5).plus(Money.dollar(5)) == Money.dollar(10)
