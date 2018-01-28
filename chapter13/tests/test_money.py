@@ -8,7 +8,7 @@ sys.path.append(os.pardir)
 import pytest
 from moneys.money import Money
 from moneys.bank import Bank
-
+from moneys.sum import Summation
 
 class TestMoney(object):
     """Test for money class"""
@@ -36,11 +36,25 @@ class TestMoney(object):
         assert Money.dollar(1).currency() == "USD"
     
     def test_SimpleAddition(self):
-        assert Money.dollar(5).plus(Money.dollar(5)) == Money.dollar(10)
-        
         five = Money.dollar(5)
-        sumattion = five.plus(five)
+        summation = five.plus(five)
         bank = Bank()
-        reduced = bank.reduce(sumattion, "USD")
+        reduced = bank.reduce(summation, "USD")
         assert Money.dollar(10) == reduced
 
+    def test_PlusReturnsSum(self):
+        five = Money.dollar(5)
+        result = five.plus(five)
+        assert five == result.augend()
+        assert five == result.addend()
+
+    def test_ReduceSum(self):
+        summation = Summation(Money.dollar(3), Money.dollar(4))
+        bank = Bank()
+        result = bank.reduce(summation, "USD")
+        assert result == Money.dollar(7)
+
+    def test_ReduceMoney(self):
+        bank = Bank()
+        result = bank.reduce(Money.dollar(1), "USD")
+        assert Money.dollar(1) == result
