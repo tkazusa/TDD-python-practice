@@ -7,5 +7,5 @@ class Bank(object):
     def __init__(self):
         pass
 
-    def reduce(self, expression, currency):
-        return Money.dollar(10)
+    def reduce(self, source: Expression, currency):
+        return source.reduce(currency)

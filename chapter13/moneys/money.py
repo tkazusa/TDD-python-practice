@@ -18,8 +18,12 @@ class Money(object):
     def currency(self):
         return self._currency
 
-    def plus(self, added):
-        return Money(self.amount + added.amount, self.currency())
+    def plus(self, addend):
+        from .sum import Summation
+        return Summation(self, addend)
+
+    def reduce(self, currency):
+        return self
 
     @staticmethod
     def dollar(amount: int):
@@ -30,4 +34,5 @@ class Money(object):
     def franc(amount: int):
         """"create franc"""
         return Money(amount, "CHF")
+
 
