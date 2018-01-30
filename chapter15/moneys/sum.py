@@ -15,6 +15,7 @@ class Summation(Expression):
         return self._addend
 
     def reduce(self, bank, currency):
-        amount = self.augend().amount + self.addend().amount
+        amount = self.augend().reduce(bank, currency).amount + \
+            self.addend().reduce(bank, currency).amount
         return Money(amount, currency)
 
